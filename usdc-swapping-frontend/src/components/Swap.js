@@ -9,9 +9,9 @@ function Swap() {
             <button className="home-button">
               <img src="/usdc.png" alt="Coin" className="coin-image"/>
               <div className="text-container">
-                <div className="amount-text">1000 USDC</div>
+                <div className="amount-text">50 USDC</div>
                 <div className="action-text">Initiating Swap</div>
-                <img src="/loading.gif" alt="Loading" className="loading-icon"/>  {/* Loading icon/gif */}
+                <img src="/loading.gif" alt="Loading" className="loading-icon-swap"/>  {/* Loading icon/gif */}
               </div>
             </button>
           </Link>

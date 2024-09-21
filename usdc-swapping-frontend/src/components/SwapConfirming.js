@@ -1,17 +1,39 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './SwapConfirming.css';  // Import the CSS for styling
+import React from "react";
+import { Link } from "react-router-dom";
+import "./SwapConfirming.css"; // Import the CSS for styling
 
 function SwapConfirming() {
   return (
     <div className="home-container">
-      <Link to="/confirming" className="link-style">
-        <button className="home-button-3s">
-          <div className="content-container">
-            <img src="/usdc.png" alt="Coin" className="coin-image"/>
-            <div className="amount-text">1000 USDC</div>
+      <Link to="/confirmed" className="link-style">
+        <button className="home-button-2">
+          <div className="grid-container">
+            <div className="grid-row centered-text">
+              <div className="swapping">Swapping...</div>
+            </div>
+            <div className="grid-row">
+              <img
+                src="/usdc.png"
+                alt="Icon 1"
+                className="icon-image round-image"
+              />
+              <div className="currency-text">50 USDC</div>
+            </div>
+            <div className="grid-row centered-text">
+              <div>to</div>
+            </div>
+            <div className="grid-row">
+              <img
+                src="/singapore.jpeg"
+                alt="Icon 2"
+                className="icon-image round-image"
+              />
+              <div className="currency-text">1277.10 SGD</div>
+            </div>
+            <div className="grid-row">
+              <img src="/loading.gif" alt="Loading" className="loading-icon" />
+            </div>
           </div>
-          <div className="action-text">Select Swap</div>
         </button>
       </Link>
     </div>

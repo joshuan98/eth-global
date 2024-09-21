@@ -175,7 +175,7 @@
     overflow: hidden; /* Hides parts of the image that overflow the container */
 }
 
-.loading-icon {
+.loading-icon-swap {
     width: 100px;
     height: 100px;
     position: absolute; /* This takes it out of the normal document flow */

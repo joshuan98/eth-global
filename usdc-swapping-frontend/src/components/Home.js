@@ -9,7 +9,7 @@ function Home() {
         <button className="home-button">
           <img src="/usdc.png" alt="Coin" className="coin-image"/>
           <div className="text-container">
-            <div className="amount-text">1000 USDC</div>
+            <div className="amount-text">50 USDC</div>
             <div className="action-text">Select Swap</div>
           </div>
         </button>

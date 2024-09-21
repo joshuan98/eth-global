@@ -1,12 +1,13 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './components/Home';
-import Swap from './components/Swap';
-import SwapSelect from './components/SwapSelect';
-import './style.css';
-import './components/Home.css';  // We'll add styling in this file
-import SwapConfirmation from './components/SwapConfirmation';
-import SwapConfirming from './components/SwapConfirming';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
+import Swap from "./components/Swap";
+import SwapSelect from "./components/SwapSelect";
+import "./style.css";
+import "./components/Home.css"; // We'll add styling in this file
+import SwapConfirmation from "./components/SwapConfirmation";
+import SwapConfirming from "./components/SwapConfirming";
+import SwapConfirmed from "./components/SwapConfirmed";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/select" element={<SwapSelect />} />
           <Route path="/confirmation" element={<SwapConfirmation />} />
           <Route path="/confirming" element={<SwapConfirming />} />
+          <Route path="/confirmed" element={<SwapConfirmed />} />
         </Routes>
       </div>
     </Router>

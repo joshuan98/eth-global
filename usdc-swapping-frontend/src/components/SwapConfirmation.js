@@ -60,7 +60,7 @@ function SwapConfirmation() {
             alt="Icon 1"
             className="icon-image round-image"
           />
-          <div className="options-title">1000 USDC</div>
+          <div className="options-title">50 USDC</div>
           <div className="confirmation-box">
             <p>Swap Details</p>
 
@@ -82,7 +82,7 @@ function SwapConfirmation() {
             </div>
             <button
               className="swap-button"
-              onClick={account ? swapTokens(1000) : connectMetaMask}
+              onClick={account ? swapTokens(50000000) : connectMetaMask}
             >
               {account ? `Swap` : "Connect"}
             </button>
@@ -113,10 +113,10 @@ function SwapConfirmation() {
               </div>
               <div className="confirmation-column">
                 <p>Fee% / Value:</p>
-                <p>1% / 10 USDC</p>
-                <p>0.5% / 5 USDC</p>
-                <p>0.5% / 5 USDC</p>
-                <p>0.1% / 1 USDC</p>
+                <p>1% / 0.5 USDC</p>
+                <p>0.5% / 0.25 USDC</p>
+                <p>0.5% / 0.25 USDC</p>
+                <p>0.1% / 0.05 USDC</p>
               </div>
             </div>
 

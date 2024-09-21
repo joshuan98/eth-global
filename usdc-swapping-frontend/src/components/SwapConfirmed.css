@@ -1,0 +1,88 @@
+/* Style for the home container */
+.home-container {
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+/* Button centering */
+.home-button-2 {
+  display: flex;
+  flex-direction: column;
+  /* Center content horizontally */
+}
+
+
+/* Link styling */
+.link-style {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Grid container for two rows and two columns */
+.content-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Two equal columns */
+  grid-template-rows: auto auto;
+  /* Two rows */
+  gap: 15px;
+  /* Gap between grid items */
+  margin-bottom: 15px;
+  /* Adds space below */
+}
+
+.swapping {
+  font-size: 42px;
+}
+
+/* Style for the container holding the grid */
+.grid-container {
+  display: flex;
+  flex-direction: column;
+  /* Stack the rows vertically */
+  gap: 50px;
+  /* Space between the rows */
+}
+
+/* Each row with image and text should be a flex row */
+.grid-row {
+  display: flex;
+  /* Align image and text horizontally */
+  align-items: center;
+  /* Center vertically */
+  gap: 10px;
+  /* Space between the image and the text */
+}
+
+/* Center text within rows like "Swapping" and "to" */
+.centered-text {
+  justify-content: center;
+  /* Centers the text horizontally */
+  text-align: center;
+}
+
+/* Image styling */
+.icon-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Currency text next to the image */
+.currency-text {
+  font-size: 64px;
+  color: white;
+}
+
+/* Loading icon styling */
+.loading-icon {
+  width: 80px;
+  height: 80px;
+  padding-left: 50%;
+}
+
+.transfer-text {
+  font-size: 36px;
+  padding-top: 40px;
+}
