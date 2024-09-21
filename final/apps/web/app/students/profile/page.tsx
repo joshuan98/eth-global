@@ -100,7 +100,7 @@ export default function ProfilePage() {
               name="monthlyIncome"
               value={profileData.monthlyIncome}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm pl-1"
             />
           </div>
 
@@ -114,7 +114,7 @@ export default function ProfilePage() {
               name="householdMembers"
               value={profileData.householdMembers}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm pl-1"
             />
           </div>
 
@@ -128,7 +128,7 @@ export default function ProfilePage() {
               name="studentIncome"
               value={profileData.studentIncome}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm pl-1"
             />
           </div>
 

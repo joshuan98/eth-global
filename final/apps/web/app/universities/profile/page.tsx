@@ -14,7 +14,7 @@ export default function FinancialAidCriteriaPage() {
 
   // Initial state for the fields
   const [criteriaData, setCriteriaData] = useState({
-    residencyStatus: "", // For dropdown
+    residencyStatus: "singapore-citizen", // For dropdown
     grossMonthlyIncome: 0,
     grossMonthlyPerCapitaIncome: 0,
   });
@@ -81,7 +81,6 @@ export default function FinancialAidCriteriaPage() {
               onChange={handleChange}
               className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             >
-              <option value="">Select Residency Status</option>
               <option value="singapore-citizen">Singapore Citizen</option>
               <option value="singapore-pr">Singapore Permanent Resident</option>
               <option value="other">Others</option>
@@ -98,7 +97,7 @@ export default function FinancialAidCriteriaPage() {
               name="grossMonthlyIncome"
               value={criteriaData.grossMonthlyIncome}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm pl-1"
             />
           </div>
 
@@ -112,7 +111,7 @@ export default function FinancialAidCriteriaPage() {
               name="grossMonthlyPerCapitaIncome"
               value={criteriaData.grossMonthlyPerCapitaIncome}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm pl-1"
             />
           </div>
 

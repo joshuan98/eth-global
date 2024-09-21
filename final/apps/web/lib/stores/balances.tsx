@@ -133,7 +133,7 @@ export const useFaucet = () => {
 
     wallet.addPendingTransaction(pendingTransaction);
   }, [client.client, wallet.wallet]);
-
+  
 };
 
 export const useUploadEligibility = () => {

@@ -32,6 +32,9 @@ export default function Home() {
     studentIncome: 0,
   });
 
+  // State to track the accepted application
+  const [acceptedUniversity, setAcceptedUniversity] = useState<string | null>(null);
+
   // Load profileData from localStorage when the component mounts
   useEffect(() => {
     const storedProfileData = localStorage.getItem("profileData");
@@ -41,13 +44,19 @@ export default function Home() {
   }, []);
 
   const handleEligibilityClick = (application: string) => {
+    // Perform eligibility check
     check(profileData.monthlyIncome, profileData.householdMembers, profileData.studentIncome);
+
+    // Introduce a delay before updating the state
+    setTimeout(() => {
+      // Update acceptedUniversity state to mark this application as accepted after delay
+      setAcceptedUniversity(application);
+    }, 5000); // 1000 milliseconds = 1 second delay
   };
 
   return (
     <div className="mx-auto h-full pt-16">
       <div className="flex flex-col items-center justify-center w-full h-full pt-16">
-
         {/* Welcome Text */}
         <h1 className="text-4xl font-bold text-black mb-8">
           Welcome to Your Dashboard
@@ -72,7 +81,15 @@ export default function Home() {
                   <td className="py-3 px-6 text-left">{application.universities}</td>
                   <td className="py-3 px-6 text-left">${application.amount}</td>
                   <td className="py-3 px-6 text-left">
-                    {application.eligibility === "eligible" ? (
+                    {acceptedUniversity ? (
+                      acceptedUniversity === application.universities ? (
+                        <span className="bg-green-700 text-white px-3 py-1 rounded">
+                          Accepted
+                        </span>
+                      ) : (
+                        <span className="text-gray-500">-</span>
+                      )
+                    ) : application.eligibility === "eligible" ? (
                       <button
                         className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-700"
                         onClick={() => handleEligibilityClick(application.universities)}
@@ -92,7 +109,3 @@ export default function Home() {
     </div>
   );
 }
-function checkEligibilityCriteria() {
-  throw new Error("Function not implemented.");
-}
-
