@@ -32,7 +32,12 @@ export default function Header({
     <div className="flex items-center justify-between border-b p-2 shadow-sm">
       <div className="container flex">
         <div className="flex basis-6/12 items-center justify-start">
-          <Image className="h-8 w-8" src={protokit} alt={"Protokit logo"} />
+          <Button
+            className="p-0 bg-transparent border-none hover:bg-transparent"
+            onClick={() => router.push('/success')}
+          >
+            <Image className="h-8 w-8" src={protokit} alt={"Protokit logo"} />
+          </Button>
           <Separator className="mx-4 h-8" orientation={"vertical"} />
           <div className="flex grow">
             <Chain height={blockHeight} />
@@ -49,7 +54,7 @@ export default function Header({
                 {balanceLoading && balance === undefined ? (
                   <Skeleton className="h-4 w-full" />
                 ) : (
-                  <p className="text-xs font-bold">{balance} MINA</p>
+                  <p className="text-xs font-bold">{balance} USDC</p>
                 )}
               </div>
             </div>
