@@ -6,9 +6,11 @@ import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'; // Import the styles for the toasts
 // @ts-ignore
 import truncateMiddle from "truncate-middle";
+import { useUploadEligibility } from "@/lib/stores/balances";
 
 export default function FinancialAidCriteriaPage() {
   const wallet = useWalletStore();
+  const upload = useUploadEligibility();
 
   // Initial state for the fields
   const [criteriaData, setCriteriaData] = useState({
@@ -38,6 +40,8 @@ export default function FinancialAidCriteriaPage() {
   const handleSave = () => {
     localStorage.setItem("criteriaData", JSON.stringify(criteriaData));
     console.log("Financial Aid Criteria saved:", criteriaData);
+
+    upload(criteriaData.grossMonthlyIncome, criteriaData.grossMonthlyPerCapitaIncome);
 
     // Show success toast notification
     toast.success("Financial Aid Criteria saved successfully!", {

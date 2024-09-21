@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import { useCheckEligibility } from "@/lib/stores/balances";
+import React, { useEffect, useState } from "react";
 
 // Example JSON data for table rows
 const applicationsData = [
@@ -22,9 +23,25 @@ const applicationsData = [
 ];
 
 export default function Home() {
+  const check = useCheckEligibility();
+
+  // Initial state for the fields
+  const [profileData, setProfileData] = useState({
+    monthlyIncome: 0,
+    householdMembers: 0,
+    studentIncome: 0,
+  });
+
+  // Load profileData from localStorage when the component mounts
+  useEffect(() => {
+    const storedProfileData = localStorage.getItem("profileData");
+    if (storedProfileData) {
+      setProfileData(JSON.parse(storedProfileData));
+    }
+  }, []);
+
   const handleEligibilityClick = (application: string) => {
-    console.log(`${application} clicked!`);
-    // Implement any functionality you'd want here
+    check(profileData.monthlyIncome, profileData.householdMembers, profileData.studentIncome);
   };
 
   return (
@@ -75,3 +92,7 @@ export default function Home() {
     </div>
   );
 }
+function checkEligibilityCriteria() {
+  throw new Error("Function not implemented.");
+}
+
