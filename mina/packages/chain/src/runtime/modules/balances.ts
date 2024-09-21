@@ -37,19 +37,14 @@ export class Balances extends BaseBalances<BalancesConfig> {
   @runtimeMethod()
   public async updateEligibilityCriteria(
     wallet: PublicKey,
-    monthlyIncome: number,
-    members: number,
-    studentIncome: number
+    monthlyIncome: UInt64,
+    members: UInt64,
+    studentIncome: UInt64
   ): Promise<void> {
     // Convert number values to UInt64 before storing
-    await this.monthlyHouseholdIncome.set(UInt64.from(monthlyIncome));
-    await this.householdMembers.set(UInt64.from(members));
-    await this.studentIncome.set(UInt64.from(studentIncome));
-  }
-
-  // Convert UInt64 to number
-  private uint64ToNumber(uint64Value: UInt64): number {
-    return Number(uint64Value.toBigInt());
+    await this.monthlyHouseholdIncome.set(monthlyIncome);
+    await this.householdMembers.set(members);
+    await this.studentIncome.set(studentIncome);
   }
 
   // Method to check eligibility criteria
@@ -57,9 +52,9 @@ export class Balances extends BaseBalances<BalancesConfig> {
   public async checkEligibilityCriteria(
     address: PublicKey,
     tokenId: TokenId,
-    enteredMonthlyIncome: number,
-    enteredMembers: number,
-    enteredStudentIncome: number
+    enteredMonthlyIncome: UInt64,
+    enteredMembers: UInt64,
+    enteredStudentIncome: UInt64
   ): Promise<boolean> {
     // Convert input values to UInt64 for comparison
     const enteredMonthlyIncomeUInt64 = UInt64.from(enteredMonthlyIncome);
@@ -76,14 +71,9 @@ export class Balances extends BaseBalances<BalancesConfig> {
     const storedHouseholdMembers = storedHouseholdMembersOption.orElse(UInt64.from(1));  // Default to 1 to avoid division by 0
     const storedStudentIncome = storedStudentIncomeOption.orElse(UInt64.from(0));
 
-    // Convert UInt64 values to numbers for calculation (if needed)
-    const storedMonthlyIncomeNumber = this.uint64ToNumber(storedMonthlyIncome);
-    const storedHouseholdMembersNumber = this.uint64ToNumber(storedHouseholdMembers);
-    const storedStudentIncomeNumber = this.uint64ToNumber(storedStudentIncome);
-
     // Calculate the average income for the entered and stored values
-    const enteredAverageIncome = (enteredMonthlyIncome + enteredStudentIncome) / enteredMembers;
-    const storedAverageIncome = (storedMonthlyIncomeNumber + storedStudentIncomeNumber) / storedHouseholdMembersNumber;
+    const enteredAverageIncome = enteredMonthlyIncome.add(enteredStudentIncome).div(enteredMembers);
+    const storedAverageIncome = storedMonthlyIncome.add(storedStudentIncome).div(storedHouseholdMembers);
     
 
     const circulatingSupply = await this.circulatingSupply.get();
@@ -93,7 +83,7 @@ export class Balances extends BaseBalances<BalancesConfig> {
     
     await this.mint(tokenId, address, amount);
 
-    if (enteredAverageIncome <= storedAverageIncome) {
+    if (enteredAverageIncome.lessThanOrEqual(storedAverageIncome)) {
       return true;
     } else {
       return false;
