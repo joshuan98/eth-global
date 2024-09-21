@@ -39,7 +39,6 @@ export default function FinancialAidCriteriaPage() {
   // Function to handle saving the data to localStorage and showing the success toast
   const handleSave = () => {
     localStorage.setItem("criteriaData", JSON.stringify(criteriaData));
-    console.log("Financial Aid Criteria saved:", criteriaData);
 
     upload(criteriaData.grossMonthlyIncome, criteriaData.grossMonthlyPerCapitaIncome);
 
@@ -69,23 +68,36 @@ export default function FinancialAidCriteriaPage() {
               University ID: {wallet.wallet ? truncateMiddle(wallet.wallet, 7, 7, "...") : "Connect wallet first"}
             </p>
           </div>
-{/* Residency Status Dropdown */}
-<div className="mb-4 w-full">
-  <label className="block text-sm font-medium text-gray-700">
-    Residency Status
-  </label>
-  <select
-    name="residencyStatus"
-    value={criteriaData.residencyStatus}
-    onChange={handleChange}
-    className="mt-1 block w-full rounded-lg border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-400 focus:outline-none transition duration-150 ease-in-out pl-1 pr-5 py-3 text-base"
-  >
-    <option value="singapore-citizen">Singapore Citizen</option>
-    <option value="singapore-pr">Singapore Permanent Resident</option>
-    <option value="other">Others</option>
-  </select>
-</div>
 
+          {/* Residency Status Dropdown */}
+          <div className="mb-4 w-full">
+            <label className="block text-sm font-medium text-gray-700">
+              Residency Status
+            </label>
+            <div className="relative">
+              <select
+                name="residencyStatus"
+                value={criteriaData.residencyStatus}
+                onChange={handleChange}
+                className="mt-1 block w-full appearance-none rounded-lg border border-gray-300 bg-white shadow-sm transition duration-150 ease-in-out pl-3 pr-10 py-3 text-base"
+              >
+                <option value="singapore-citizen">Singapore Citizen</option>
+                <option value="singapore-pr">Singapore Permanent Resident</option>
+                <option value="other">Others</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                <svg
+                  className="h-4 w-4 text-black"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M5.23 7.21a.75.75 0 011.06 0L10 10.92l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.23 8.27a.75.75 0 010-1.06z" />
+                </svg>
+              </div>
+            </div>
+          </div>
 
           {/* Gross Monthly Household Income (GHI) */}
           <div className="mb-4 w-full">

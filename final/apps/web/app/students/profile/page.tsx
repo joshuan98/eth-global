@@ -38,7 +38,6 @@ export default function ProfilePage() {
   // Function to handle saving the data to localStorage and showing the success toast
   const handleSave = () => {
     localStorage.setItem("profileData", JSON.stringify(profileData));
-    console.log("Profile data saved:", profileData);
 
     // Show success toast notification
     toast.success("Profile data saved successfully!", {
