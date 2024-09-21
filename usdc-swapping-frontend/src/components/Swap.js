@@ -22,7 +22,7 @@ function Swap() {
               <div className="internal-button">
                 <div className="left-side">
                   <div className="internal-title">Singapore Dollar</div>
-                  <div className="internal-desc">SGD/USDC ~1.277</div>
+                  <div className="internal-desc">SGD/USDC ~1.2698</div>
                 </div>
                 <img src="/singapore.jpeg" alt="Icon 1" className="icon-image round-image"/>
               </div>

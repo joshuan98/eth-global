@@ -99,7 +99,7 @@ function SwapConfirmation() {
             alt="Icon 2"
             className="icon-image round-image"
           />
-          <div className="options-title">1277.10 SGD</div>
+          <div className="options-title">63.49 SGD</div>
           <div className="confirmation-box">
             <p>Fee Details</p>
 
@@ -127,7 +127,7 @@ function SwapConfirmation() {
               </div>
               <div className="confirmation-column">
                 <p>
-                  1.2771 <span className="negative-change">(-1.54%)</span>
+                  1.2698 <span className="negative-change">(-2.11%)</span>
                 </p>
                 <p>1.2971 USD/SGD</p>
               </div>

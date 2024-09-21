@@ -17,7 +17,7 @@ function SwapConfirming() {
                 alt="Icon 2"
                 className="icon-image round-image"
               />
-              <div className="currency-text">1277.10 SGD</div>
+              <div className="currency-text">63.49 SGD</div>
             </div>
           </div>
           <div className="centered-text">
