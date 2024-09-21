@@ -16,7 +16,7 @@ function Swap() {
             </button>
           </Link>
           <div className="arrow-container">↔️</div> {/* Here's the bidirectional arrow */}
-          <Link to="/confirmation" className="link-style">
+          <Link to="/swap" className="link-style">
             <button className="home-button-2">
               <div className="options-title">Select Currency</div>
               <div className="internal-button">
