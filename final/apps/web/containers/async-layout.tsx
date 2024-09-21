@@ -30,8 +30,6 @@ export default function AsyncLayout({ children }: { children: ReactNode }) {
     [client.loading, balances.loading],
   );
 
-  console.log(balances.ghi);
-
   return (
     <>
       <Header

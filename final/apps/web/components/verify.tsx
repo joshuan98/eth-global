@@ -41,7 +41,7 @@ export function Verify({ }) {
     >
       {({ open }) =>
         // This is the button that will open the IDKit modal
-        <button onClick={open}>Verify with World ID</button>
+        <button onClick={open}>Sign In</button>
       }
     </IDKitWidget>
   )

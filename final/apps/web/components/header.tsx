@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import logo from "@/public/blue.jpg";
+import logo from "@/public/logo.jpg";
 import Image from "next/image";
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 // @ts-ignore
@@ -16,7 +16,7 @@ export interface HeaderProps {
   balance?: string;
   balanceLoading: boolean;
   blockHeight?: string;
-  ghi?:string;
+  ghi?: string;
 }
 
 export default function Header({
@@ -59,7 +59,11 @@ export default function Header({
             className="p-0 bg-transparent border-none hover:bg-transparent"
             onClick={handleNavigateSuccess}
           >
-            <Image className="h-8 w-8" src={logo} alt={"ZkScholar logo"} />
+            <Image
+              className="h-8 w-auto object-contain"
+              src={logo}
+              alt={"ZkScholar logo"}
+            />
           </Button>
           <Separator className="mx-4 h-8" orientation={"vertical"} />
           <div className="flex grow">

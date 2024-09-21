@@ -48,9 +48,6 @@ export const useBalancesStore = create<
       const balance = await client.query.runtime.Balances.balances.get(key);
       const storedPci = await client.query.runtime.Balances.pci.get();
       const storedGhi = await client.query.runtime.Balances.ghi.get();
-      //print?
-      console.log(storedPci);
-      console.log(storedGhi);
 
       set((state) => {
         state.loading = false;
@@ -102,7 +99,6 @@ export const useBalancesStore = create<
         const householdMembersBalance = Balance.from(householdMembers);
         const studentIncomeBalance = Balance.from(studentIncome);
         const res = await balances.checkEligibilityCriteria(sender, tokenId, monthlyIncomeBalance, householdMembersBalance, studentIncomeBalance);
-        console.log(res);
       });
 
       await tx.sign();
@@ -143,7 +139,7 @@ export const useFaucet = () => {
 
     wallet.addPendingTransaction(pendingTransaction);
   }, [client.client, wallet.wallet]);
-  
+
 };
 
 export const useUploadEligibility = () => {

@@ -1,29 +1,44 @@
 "use client";
 
-import { useCheckEligibility } from "@/lib/stores/balances";
+import { useBalancesStore, useCheckEligibility } from "@/lib/stores/balances";
+import { useWalletStore } from "@/lib/stores/wallet";
 import React, { useEffect, useState } from "react";
 
 // Example JSON data for table rows
 const applicationsData = [
   {
     universities: "National University of Singapore",
-    amount: 5000,
+    amount: 50000,
     eligibility: "eligible",
   },
   {
     universities: "Nanyang Technological University",
-    amount: 3000,
+    amount: 30000,
     eligibility: "not eligible",
   },
   {
     universities: "Singapore Management University",
-    amount: 2000,
+    amount: 20000,
     eligibility: "eligible",
   },
 ];
 
 export default function Home() {
   const check = useCheckEligibility();
+  const wallet = useWalletStore();
+  const balances = useBalancesStore();
+
+  const [balance, setBalance] = useState("");
+
+  useEffect(() => {
+    // Only calculate the balance when `balances.loading` is false and `wallet.wallet` is defined
+    if (!balances.loading && wallet.wallet) {
+      setBalance(balances.balances[wallet.wallet] || "");
+    } else {
+      setBalance("");
+    }
+  }, [balances.loading, wallet.wallet, balances.balances]); // Depend on balances.loading, wallet.wallet, and balances.balances
+
 
   // Initial state for the fields
   const [profileData, setProfileData] = useState({
@@ -43,15 +58,14 @@ export default function Home() {
     }
   }, []);
 
-  const handleEligibilityClick = (application: string) => {
-    // Perform eligibility check
-    check(profileData.monthlyIncome, profileData.householdMembers, profileData.studentIncome);
+  const handleEligibilityClick = async (application: string) => {
+    // Perform eligibility check and await the result
+    const res = await check(profileData.monthlyIncome, profileData.householdMembers, profileData.studentIncome);
 
-    // Introduce a delay before updating the state
-    setTimeout(() => {
-      // Update acceptedUniversity state to mark this application as accepted after delay
-      setAcceptedUniversity(application);
-    }, 5000); // 1000 milliseconds = 1 second delay
+    // Wait for 5 seconds (5000 milliseconds)
+    await new Promise(resolve => setTimeout(resolve, 5000));
+
+    setAcceptedUniversity(application);
   };
 
   return (
