@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useWalletStore } from "@/lib/stores/wallet";
-import Dropzone from 'react-dropzone';
+import Dropzone from "react-dropzone";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css'; // Import the styles for the toasts
+import "react-toastify/dist/ReactToastify.css"; // Import the styles for the toasts
 // @ts-ignore
 import truncateMiddle from "truncate-middle";
 
@@ -63,27 +63,25 @@ export default function ProfilePage() {
           {/* Display ID */}
           <div className="mb-4">
             <p className="text-gray-700">
-              Profile ID: {wallet.wallet ? truncateMiddle(wallet.wallet, 7, 7, "...") : "Connect wallet first"}
+              Profile ID:{" "}
+              {wallet.wallet
+                ? truncateMiddle(wallet.wallet, 7, 7, "...")
+                : "Connect wallet first"}
             </p>
           </div>
 
-          <div className="mb-4">
-            <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
+          <div className="mb-4 w-full">
+            <Dropzone
+              onDrop={(acceptedFiles) => console.log(acceptedFiles)}
+            >
               {({ getRootProps, getInputProps }) => (
                 <section>
                   <div
                     {...getRootProps()}
-                    style={{
-                      border: "2px dotted #999",
-                      backgroundColor: "#f9f9f9",
-                      padding: "20px",
-                      textAlign: "center",
-                      borderRadius: "8px",
-                      cursor: "pointer"
-                    }}
+                    className="border-2 border-dotted border-gray-300 bg-white hover:bg-gray-50 transition rounded-lg p-6 text-center cursor-pointer"
                   >
                     <input {...getInputProps()} />
-                    <p>Drag 'n' drop some files here, or click to select files</p>
+                    <p className="text-gray-500">Drag 'n' drop some files here, or click to select files</p>
                   </div>
                 </section>
               )}
@@ -100,7 +98,8 @@ export default function ProfilePage() {
               name="monthlyIncome"
               value={profileData.monthlyIncome}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm pl-1"
+              className="mt-1 block w-full rounded-lg border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-400 focus:outline-none transition duration-150 ease-in-out p-3 text-base placeholder-gray-400"
+              placeholder="Enter your monthly income"
             />
           </div>
 
@@ -114,7 +113,8 @@ export default function ProfilePage() {
               name="householdMembers"
               value={profileData.householdMembers}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm pl-1"
+              className="mt-1 block w-full rounded-lg border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-400 focus:outline-none transition duration-150 ease-in-out p-3 text-base placeholder-gray-400"
+              placeholder="Enter number of household members"
             />
           </div>
 
@@ -128,15 +128,16 @@ export default function ProfilePage() {
               name="studentIncome"
               value={profileData.studentIncome}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm pl-1"
+              className="mt-1 block w-full rounded-lg border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-400 focus:outline-none transition duration-150 ease-in-out p-3 text-base placeholder-gray-400"
+              placeholder="Enter your student income"
             />
           </div>
 
           {/* Save Button */}
           <button
             onClick={handleSave}
-            className="mt-4 px-4 py-2 bg-black text-white font-bold rounded-md hover:bg-gray-800"
-          >
+            className="mt-4 px-4 py-2 bg-black text-white font-bold rounded-lg hover:bg-gray-800 transition duration-150 ease-in-out shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            >
             Save
           </button>
         </div>

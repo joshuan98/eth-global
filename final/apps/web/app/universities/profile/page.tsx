@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useWalletStore } from "@/lib/stores/wallet";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css'; // Import the styles for the toasts
+import "react-toastify/dist/ReactToastify.css"; // Import the styles for the toasts
 // @ts-ignore
 import truncateMiddle from "truncate-middle";
 import { useUploadEligibility } from "@/lib/stores/balances";
@@ -69,23 +69,23 @@ export default function FinancialAidCriteriaPage() {
               University ID: {wallet.wallet ? truncateMiddle(wallet.wallet, 7, 7, "...") : "Connect wallet first"}
             </p>
           </div>
+{/* Residency Status Dropdown */}
+<div className="mb-4 w-full">
+  <label className="block text-sm font-medium text-gray-700">
+    Residency Status
+  </label>
+  <select
+    name="residencyStatus"
+    value={criteriaData.residencyStatus}
+    onChange={handleChange}
+    className="mt-1 block w-full rounded-lg border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-400 focus:outline-none transition duration-150 ease-in-out pl-1 pr-5 py-3 text-base"
+  >
+    <option value="singapore-citizen">Singapore Citizen</option>
+    <option value="singapore-pr">Singapore Permanent Resident</option>
+    <option value="other">Others</option>
+  </select>
+</div>
 
-          {/* Residency Status Dropdown */}
-          <div className="mb-4 w-full">
-            <label className="block text-sm font-medium text-gray-700">
-              Residency Status
-            </label>
-            <select
-              name="residencyStatus"
-              value={criteriaData.residencyStatus}
-              onChange={handleChange}
-              className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            >
-              <option value="singapore-citizen">Singapore Citizen</option>
-              <option value="singapore-pr">Singapore Permanent Resident</option>
-              <option value="other">Others</option>
-            </select>
-          </div>
 
           {/* Gross Monthly Household Income (GHI) */}
           <div className="mb-4 w-full">
@@ -97,7 +97,8 @@ export default function FinancialAidCriteriaPage() {
               name="grossMonthlyIncome"
               value={criteriaData.grossMonthlyIncome}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm pl-1"
+              className="mt-1 block w-full rounded-lg border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-400 focus:outline-none transition duration-150 ease-in-out p-3 text-base placeholder-gray-400"
+              placeholder="Enter gross household income"
             />
           </div>
 
@@ -111,14 +112,15 @@ export default function FinancialAidCriteriaPage() {
               name="grossMonthlyPerCapitaIncome"
               value={criteriaData.grossMonthlyPerCapitaIncome}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm pl-1"
+              className="mt-1 block w-full rounded-lg border border-gray-300 bg-white shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-400 focus:outline-none transition duration-150 ease-in-out p-3 text-base placeholder-gray-400"
+              placeholder="Enter per capita household income"
             />
           </div>
 
           {/* Save Button */}
           <button
             onClick={handleSave}
-            className="mt-4 px-4 py-2 bg-black text-white font-bold rounded-md hover:bg-gray-800"
+            className="mt-4 px-4 py-2 bg-black text-white font-bold rounded-lg hover:bg-gray-800 transition duration-150 ease-in-out shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
           >
             Save
           </button>

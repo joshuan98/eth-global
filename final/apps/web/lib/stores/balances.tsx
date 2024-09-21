@@ -14,6 +14,7 @@ export interface BalancesState {
     // address - balance
     [key: string]: string;
   };
+  ghi: string;
   loadBalance: (client: Client, address: string) => Promise<void>;
   faucet: (client: Client, address: string) => Promise<PendingTransaction>;
   checkEligibility: (client: Client, address: string, monthlyIncome: number, householdMembers: number, studentIncome: number) => Promise<PendingTransaction>;
@@ -36,6 +37,7 @@ export const useBalancesStore = create<
   immer((set) => ({
     loading: Boolean(false),
     balances: {},
+    ghi: "",
     async loadBalance(client: Client, address: string) {
       set((state) => {
         state.loading = true;
@@ -44,10 +46,16 @@ export const useBalancesStore = create<
       const key = BalancesKey.from(tokenId, PublicKey.fromBase58(address));
 
       const balance = await client.query.runtime.Balances.balances.get(key);
+      const storedPci = await client.query.runtime.Balances.pci.get();
+      const storedGhi = await client.query.runtime.Balances.ghi.get();
+      //print?
+      console.log(storedPci);
+      console.log(storedGhi);
 
       set((state) => {
         state.loading = false;
         state.balances[address] = balance?.toString() ?? "0";
+        state.ghi = storedGhi?.toString() ?? "0";
       });
     },
     async faucet(client: Client, address: string) {
@@ -70,10 +78,11 @@ export const useBalancesStore = create<
       const sender = PublicKey.fromBase58(address);
 
       const tx = await client.transaction(sender, async () => {
-        const ghiUInt64 = UInt64.from(ghi);
-        const pciUInt64 = UInt64.from(pci);
 
-        await balances.updateEligibilityCriteria(pciUInt64, ghiUInt64);
+        const ghiBalance = Balance.from(ghi);
+        const pciBalance = Balance.from(pci);
+
+        await balances.updateEligibilityCriteria(ghiBalance, pciBalance);
       });
 
       await tx.sign();
@@ -88,11 +97,12 @@ export const useBalancesStore = create<
       const sender = PublicKey.fromBase58(address);
 
       const tx = await client.transaction(sender, async () => {
-        const monthlyIncomeUInt64 = UInt64.from(monthlyIncome);
-        const householdMembersUInt64 = UInt64.from(householdMembers);
-        const studentIncomeUInt64 = UInt64.from(studentIncome);
 
-        await balances.checkEligibilityCriteria(sender, tokenId, monthlyIncomeUInt64, householdMembersUInt64, studentIncomeUInt64);
+        const monthlyIncomeBalance = Balance.from(monthlyIncome);
+        const householdMembersBalance = Balance.from(householdMembers);
+        const studentIncomeBalance = Balance.from(studentIncome);
+        const res = await balances.checkEligibilityCriteria(sender, tokenId, monthlyIncomeBalance, householdMembersBalance, studentIncomeBalance);
+        console.log(res);
       });
 
       await tx.sign();

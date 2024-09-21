@@ -55,35 +55,32 @@ export default function Home() {
   };
 
   return (
-    <div className="mx-auto h-full pt-16">
-      <div className="flex flex-col items-center justify-center w-full h-full pt-16">
-        {/* Welcome Text */}
-        <h1 className="text-4xl font-bold text-black mb-8">
+    <div className="mx-auto pt-16 flex justify-center items-center min-h-screen bg-gray-50">
+      <div className="w-full max-w-4xl px-4">
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">
           Welcome to Your Dashboard
         </h1>
-
-        {/* Table */}
-        <div className="w-full max-w-4xl">
-          <table className="min-w-full bg-white shadow-md rounded-lg">
-            <thead>
-              <tr className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                <th className="py-3 px-6 text-left">My Applications</th>
-                <th className="py-3 px-6 text-left">Amount</th>
-                <th className="py-3 px-6 text-left">Eligibility</th>
+        <div className="overflow-hidden rounded-lg shadow-lg">
+          <table className="w-full">
+            <thead className="bg-gray-800 text-white">
+              <tr>
+                <th className="py-4 px-6 text-left">My Applications</th>
+                <th className="py-4 px-6 text-left">Amount</th>
+                <th className="py-4 px-6 text-left">Eligibility</th>
               </tr>
             </thead>
-            <tbody className="text-gray-700 text-sm font-light">
+            <tbody>
               {applicationsData.map((application, index) => (
                 <tr
                   key={index}
-                  className="border-b border-gray-200 hover:bg-gray-100"
+                  className={`border-b border-gray-200 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}
                 >
-                  <td className="py-3 px-6 text-left">{application.universities}</td>
-                  <td className="py-3 px-6 text-left">${application.amount}</td>
+                  <td className="py-3 px-6 text-left text-gray-800">{application.universities}</td>
+                  <td className="py-3 px-6 text-left">${application.amount.toLocaleString()}</td>
                   <td className="py-3 px-6 text-left">
                     {acceptedUniversity ? (
                       acceptedUniversity === application.universities ? (
-                        <span className="bg-green-700 text-white px-3 py-1 rounded">
+                        <span className="bg-green-700 text-white px-3 py-1 rounded-full">
                           Accepted
                         </span>
                       ) : (
@@ -91,13 +88,15 @@ export default function Home() {
                       )
                     ) : application.eligibility === "eligible" ? (
                       <button
-                        className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-700"
+                        className="bg-green-500 text-white px-3 py-1 rounded-full hover:bg-green-700"
                         onClick={() => handleEligibilityClick(application.universities)}
                       >
                         Eligible
                       </button>
                     ) : (
-                      <span className="text-gray-500">Not Eligible</span>
+                      <span className="bg-red-500 text-white px-3 py-1 rounded-full">
+                        Not Eligible
+                      </span>
                     )}
                   </td>
                 </tr>

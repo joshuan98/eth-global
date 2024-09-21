@@ -16,6 +16,7 @@ export interface HeaderProps {
   balance?: string;
   balanceLoading: boolean;
   blockHeight?: string;
+  ghi?:string;
 }
 
 export default function Header({
@@ -25,6 +26,7 @@ export default function Header({
   balance,
   balanceLoading,
   blockHeight,
+  ghi
 }: HeaderProps) {
   const router = useRouter();
   const pathname = usePathname();  // Get current path

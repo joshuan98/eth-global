@@ -30,6 +30,8 @@ export default function AsyncLayout({ children }: { children: ReactNode }) {
     [client.loading, balances.loading],
   );
 
+  console.log(balances.ghi);
+
   return (
     <>
       <Header
@@ -39,6 +41,7 @@ export default function AsyncLayout({ children }: { children: ReactNode }) {
         wallet={wallet.wallet}
         onConnectWallet={wallet.connectWallet}
         blockHeight={chain.block?.height ?? "-"}
+        ghi={balances.ghi}
       />
       {children}
       <Toaster />

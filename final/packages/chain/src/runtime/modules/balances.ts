@@ -12,8 +12,8 @@ export class Balances extends BaseBalances<BalancesConfig> {
   @state() public circulatingSupply = State.from<Balance>(Balance);
 
   // New state variables for eligibility criteria, stored as UInt64
-  @state() public pci = State.from<UInt64>(UInt64);
-  @state() public ghi = State.from<UInt64>(UInt64);
+  @state() public pci = State.from<Balance>(Balance);
+  @state() public ghi = State.from<Balance>(Balance);
 
   // Method to add balance and check circulating supply
   @runtimeMethod()
@@ -35,12 +35,14 @@ export class Balances extends BaseBalances<BalancesConfig> {
   // Method to update eligibility criteria
   @runtimeMethod()
   public async updateEligibilityCriteria(
-    pci: UInt64,
-    ghi: UInt64,
+    pci: Balance,
+    ghi: Balance,
   ): Promise<void> {
-    // Convert number values to UInt64 before storing
-    await this.pci.set(pci);
-    await this.ghi.set(ghi);
+
+    const balancePci = pci
+    const balanceGhi = ghi
+    await this.pci.set(balancePci);
+    await this.ghi.set(balanceGhi);
   }
 
   // Method to check eligibility criteria
@@ -48,9 +50,9 @@ export class Balances extends BaseBalances<BalancesConfig> {
   public async checkEligibilityCriteria(
     address: PublicKey,
     tokenId: TokenId,
-    enteredMonthlyIncome: UInt64,
-    enteredMembers: UInt64,
-    enteredStudentIncome: UInt64
+    enteredMonthlyIncome: Balance,
+    enteredMembers: Balance,
+    enteredStudentIncome: Balance
   ): Promise<boolean> {
 
     // Retrieve the stored values and handle the Option<UInt64> case
@@ -58,15 +60,17 @@ export class Balances extends BaseBalances<BalancesConfig> {
     const storedGhiOption = await this.ghi.get();
 
     // Unwrap the Option<UInt64>, providing default values if None
-    const storedPci = storedPciOption.orElse(UInt64.from(0));
-    const storedGhi = storedGhiOption.orElse(UInt64.from(1));  // Default to 1 to avoid division by 0
+    const storedPci = storedPciOption.orElse(Balance.from(0));
+    const storedGhi = storedGhiOption.orElse(Balance.from(1));  // Default to 1 to avoid division by 0
 
     // Calculate the average income for the entered and stored values
-    const studentGhi = enteredMonthlyIncome.add(enteredStudentIncome);
-    const studentPci = studentGhi.div(enteredMembers);
+    const studentGhiBalance = enteredMonthlyIncome.add(enteredStudentIncome);
+    const studentPciBalance = studentGhiBalance.div(enteredMembers);
+    assert(studentGhiBalance.lessThanOrEqual(storedGhi) || studentPciBalance.lessThanOrEqual(storedPci),
+    "You are not eligible for this financial aid program."); 
 
-    if (studentGhi.lessThanOrEqual(storedGhi) || studentPci.lessThanOrEqual(storedPci)) {
-      const amount = Balance.from(5000);
+    if (studentGhiBalance.lessThanOrEqual(storedGhi) || studentPciBalance.lessThanOrEqual(storedPci)) {
+      const amount = Balance.from(50000);
       const circulatingSupply = await this.circulatingSupply.get();
       const newCirculatingSupply = Balance.from(circulatingSupply.value).add(amount);
 
