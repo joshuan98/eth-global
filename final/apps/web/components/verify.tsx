@@ -28,7 +28,7 @@ export function Verify({ }) {
   const onSuccess = () => {
     // This is where you should perform any actions after the modal is closed
     // Such as redirecting the user to a new page
-    window.location.href = "/success";
+    window.location.href = "/students/success";
   };
 
   return (

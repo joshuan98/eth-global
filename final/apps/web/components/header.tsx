@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import protokit from "@/public/protokit-zinc.svg";
+import logo from "@/public/blue.jpg";
 import Image from "next/image";
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 // @ts-ignore
@@ -7,7 +7,7 @@ import truncateMiddle from "truncate-middle";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Chain } from "./chain";
 import { Separator } from "./ui/separator";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";  // Import usePathname to get current path
 
 export interface HeaderProps {
   loading: boolean;
@@ -26,7 +26,28 @@ export default function Header({
   balanceLoading,
   blockHeight,
 }: HeaderProps) {
-  const router = useRouter()
+  const router = useRouter();
+  const pathname = usePathname();  // Get current path
+
+  // Determine if the current path is for students or universities
+  const isStudentPath = pathname.includes("students");
+  const isUniversityPath = pathname.includes("universities");
+
+  const handleNavigateSuccess = () => {
+    if (isStudentPath) {
+      router.push("/students/success");
+    } else if (isUniversityPath) {
+      router.push("/universities/success");
+    }
+  };
+
+  const handleNavigateProfile = () => {
+    if (isStudentPath) {
+      router.push("/students/profile");
+    } else if (isUniversityPath) {
+      router.push("/universities/profile");
+    }
+  };
 
   return (
     <div className="flex items-center justify-between border-b p-2 shadow-sm">
@@ -34,9 +55,9 @@ export default function Header({
         <div className="flex basis-6/12 items-center justify-start">
           <Button
             className="p-0 bg-transparent border-none hover:bg-transparent"
-            onClick={() => router.push('/success')}
+            onClick={handleNavigateSuccess}
           >
-            <Image className="h-8 w-8" src={protokit} alt={"Protokit logo"} />
+            <Image className="h-8 w-8" src={logo} alt={"ZkScholar logo"} />
           </Button>
           <Separator className="mx-4 h-8" orientation={"vertical"} />
           <div className="flex grow">
@@ -60,7 +81,7 @@ export default function Header({
             </div>
           )}
           {/* profile */}
-          <Button className="mx-4" onClick={() => router.push('/profile')}>
+          <Button className="mx-4" onClick={handleNavigateProfile}>
             <div className="flex items-center justify-center">
               <AccountBoxIcon />
             </div>
