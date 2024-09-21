@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button";
 import protokit from "@/public/protokit-zinc.svg";
 import Image from "next/image";
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 // @ts-ignore
 import truncateMiddle from "truncate-middle";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Chain } from "./chain";
 import { Separator } from "./ui/separator";
+import { useRouter } from "next/navigation";
 
 export interface HeaderProps {
   loading: boolean;
@@ -24,6 +26,8 @@ export default function Header({
   balanceLoading,
   blockHeight,
 }: HeaderProps) {
+  const router = useRouter()
+
   return (
     <div className="flex items-center justify-between border-b p-2 shadow-sm">
       <div className="container flex">
@@ -50,6 +54,12 @@ export default function Header({
               </div>
             </div>
           )}
+          {/* profile */}
+          <Button className="mx-4" onClick={() => router.push('/profile')}>
+            <div className="flex items-center justify-center">
+              <AccountBoxIcon />
+            </div>
+          </Button>
           {/* connect wallet */}
           <Button loading={loading} className="w-44" onClick={onConnectWallet}>
             <div>
