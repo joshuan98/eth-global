@@ -5,6 +5,8 @@ import { useWalletStore } from "@/lib/stores/wallet";
 import Dropzone from "react-dropzone";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import the styles for the toasts
+import Image from "next/image";
+import noun from "@/public/noun1.png";
 // @ts-ignore
 import truncateMiddle from "truncate-middle";
 
@@ -58,6 +60,12 @@ export default function ProfilePage() {
       <div className="flex h-full w-full items-center justify-center pt-16">
         <div className="flex basis-4/12 flex-col items-center justify-center 2xl:basis-3/12">
           <h1 className="text-xl font-bold mb-4">Financial Aid Profile</h1>
+
+          <Image
+            className="w-16 h-16 mb-4"
+            src={noun}
+            alt={"Profile Icon"}
+          />
 
           {/* Display ID */}
           <div className="mb-4">
@@ -136,7 +144,7 @@ export default function ProfilePage() {
           <button
             onClick={handleSave}
             className="mt-4 px-4 py-2 bg-black text-white font-bold rounded-lg hover:bg-gray-800 transition duration-150 ease-in-out shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
-            >
+          >
             Save
           </button>
         </div>

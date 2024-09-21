@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useWalletStore } from "@/lib/stores/wallet";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import the styles for the toasts
+import Image from "next/image";
+import noun from "@/public/noun2.png";
 // @ts-ignore
 import truncateMiddle from "truncate-middle";
 import { useUploadEligibility } from "@/lib/stores/balances";
@@ -61,6 +63,12 @@ export default function FinancialAidCriteriaPage() {
       <div className="flex h-full w-full items-center justify-center pt-16">
         <div className="flex basis-4/12 flex-col items-center justify-center 2xl:basis-3/12">
           <h1 className="text-xl font-bold mb-4">University Financial Aid Criteria</h1>
+
+          <Image
+            className="w-16 h-16 mb-4"
+            src={noun}
+            alt={"Profile Icon"}
+          />
 
           {/* Display ID */}
           <div className="mb-4">
