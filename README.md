@@ -1,3 +1,6 @@
+## Link to our deck: 
+https://www.canva.com/design/DAGRYUhJYyw/vU3acD33FyWJDBhMpGfbqA/edit?utm_content=DAGRYUhJYyw&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
 # ZkScholar
 
 
